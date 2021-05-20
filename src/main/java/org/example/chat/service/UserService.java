@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -33,9 +35,13 @@ public class UserService {
     }
 
     public void saveUser(User user) {
-        List<String> colors = List.of(
-                "#DC143C", "#FF0000", "#FF1493", "#FFD700", "#00FF00", "#0000FF", "#000000"
-        );
+        List<String> colors = new ArrayList<>();
+        colors.add("#DC143C");
+        colors.add("#FF0000");
+        colors.add("#FF1493");
+        colors.add("#00FF00");
+        colors.add("#0000FF");
+        colors.add("#000000");
         String color = colors.get(new Random().nextInt(colors.size()));
         user.setColorCSS(color);
         userRepository.save(user);
