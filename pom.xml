@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
-  <artifactId>alex710_chat</artifactId>
-  <version>1.0</version>
+  <artifactId>chat</artifactId>
+  <version>1</version>
   <packaging>jar</packaging>
 
   <name>alex710_chat Maven Webapp</name>
