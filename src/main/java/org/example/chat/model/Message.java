@@ -1,5 +1,7 @@
 package org.example.chat.model;
 
+import org.example.chat.repository.LocalStore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,15 +12,22 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(columnDefinition = "text")
     private String content;
+
+    private String sender;
+
+    private String senderColor;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
     
-    public static Message of(String content) {
+    public static Message of(String content, String sender, String senderColor) {
         Message message = new Message();
         message.content = content;
+        message.sender = sender;
+        message.senderColor = senderColor;
         return message;
     }
 
@@ -46,6 +55,22 @@ public class Message {
         this.user = user;
     }
 
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getSenderColor() {
+        return senderColor;
+    }
+
+    public void setSenderColor(String senderColor) {
+        this.senderColor = senderColor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -65,6 +90,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" + "id=" + id + ", content='" + content + '\'' + ", user=" + user + '}';
+        return "Message{" + "id=" + id + ", content='" + content + '\''
+                + ", sender='" + sender + '\'' + ", user=" + user + '}';
     }
 }

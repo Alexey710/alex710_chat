@@ -31,7 +31,7 @@
             //setConnected(true);
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/greetings', function (greeting) {
-                showGreeting(JSON.parse(greeting.body).content);
+                showGreeting(JSON.parse(greeting.body));
             });
         });
     }
@@ -54,8 +54,7 @@
 
     function showGreeting(message) {
         console.log("showGreeting => " + message);
-        console.log("showGreeting USER => " + message.user);
-        $("#greetings").append("<tr><td>" + message + "</td></tr>");
+        $("#greetings").append("<tr><td>" + '<span style="color:'+ message.senderColor + '; font-weight:600;font-size: 150%">' + message.sender + ":" + '</span>' +  message.content + "</td></tr>");
     }
 
     $(function () {
@@ -126,7 +125,7 @@
                     <c:forEach items="${chat}" var="chat_m">
                         <tr>
                             <td>
-                                <span style="color: ${chat_m.user.colorCSS}; font-weight:600;font-size: 150%"><c:out value="${chat_m.user.username}"/></span>
+                                <span style="color: ${chat_m.user.colorCSS}; font-weight:600;font-size: 150%"><c:out value="${chat_m.user.username}:"/></span>
                                 <c:out value="${chat_m.content}"/>   
                             </td>
                         </tr>

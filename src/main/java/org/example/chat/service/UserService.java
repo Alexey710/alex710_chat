@@ -58,5 +58,4 @@ public class UserService {
         list.removeAll(list2);
         return list;
     }
-
 }

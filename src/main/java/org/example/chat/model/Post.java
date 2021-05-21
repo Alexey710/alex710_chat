@@ -27,6 +27,7 @@ public class Post {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
+    @JsonIgnoreProperties("user")
     private final List<Message> messages = new LinkedList<>();
 
     public static Post of(String name) {

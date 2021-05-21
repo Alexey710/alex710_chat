@@ -17,7 +17,7 @@ public class CacheToDateBaseControl {
     private LocalStore localStore;
     
     @PostMapping(value = "/cache")
-    public Post addAlltoDataBase(@RequestBody Post post) {
+    public Post addAllToDataBase(@RequestBody Post post) {
         localStore.saveAllMessagesToDataBase(post.getId());
       
         return post;

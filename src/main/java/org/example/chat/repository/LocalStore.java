@@ -20,13 +20,33 @@ public class LocalStore {
 
     @Autowired
     private UserService userService;
-    
+
+    private String sender;
+
+    private String senderColor;
+
     private final List<Message> messages = new CopyOnWriteArrayList<>();
-    
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
     public void save(Message message) {
         messages.add(message);
     }
-    
+
+    public String getSenderColor() {
+        return senderColor;
+    }
+
+    public void setSenderColor(String senderColor) {
+        this.senderColor = senderColor;
+    }
+
     public void saveAllMessagesToDataBase(long id) {
         System.out.println("start saveAllMessagesToDataBase ==========>");
         User userAuth = userService.getAuthenticatedUser();
