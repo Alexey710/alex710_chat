@@ -24,8 +24,8 @@ public class IndexControl {
     @GetMapping({"/", "/index"})
     public String index(Model model) {
         User user = userService.getAuthenticatedUser();
-        localStore.setSender(user.getUsername());
-        localStore.setSenderColor(user.getColorCSS());
+        localStore.setSenderData(user.getUsername(), user.getColorCSS());
+
         model.addAttribute("posts", postService.findAllPostByUserId(user.getId()));
         model.addAttribute("user", user.getUsername());
         return "index";

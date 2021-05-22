@@ -3,6 +3,8 @@ package org.example.chat.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.example.chat.model.Message;
@@ -11,8 +13,10 @@ import org.example.chat.model.User;
 import org.example.chat.service.PostService;
 import org.example.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+@Lazy
 @Component
 public class LocalStore {
     @Autowired
@@ -21,30 +25,23 @@ public class LocalStore {
     @Autowired
     private UserService userService;
 
-    private String sender;
-
-    private String senderColor;
+    private final Map<String, List<String>> senders = new ConcurrentHashMap<>();
 
     private final List<Message> messages = new CopyOnWriteArrayList<>();
 
-    public String getSender() {
-        return sender;
+    public void setSenderData(String sender, String senderColor) {
+        List<String> data = new ArrayList<>();
+        data.add(sender);
+        data.add(senderColor);
+        senders.put(sender, data);
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
+    public List<String> getSenderData(String sender) {
+        return senders.get(sender);
     }
 
     public void save(Message message) {
         messages.add(message);
-    }
-
-    public String getSenderColor() {
-        return senderColor;
-    }
-
-    public void setSenderColor(String senderColor) {
-        this.senderColor = senderColor;
     }
 
     public void saveAllMessagesToDataBase(long id) {

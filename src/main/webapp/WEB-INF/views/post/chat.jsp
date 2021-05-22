@@ -49,7 +49,7 @@
         console.log("start sendName()");
    
         stompClient.send("/app/chat", {}, 
-        JSON.stringify({'id': "${id}", 'content': $("#message").val()}));
+        JSON.stringify({'id': "${id}", 'sender' : "${userName}", 'content': $("#message").val()}));
     }
 
     function showGreeting(message) {
@@ -63,7 +63,8 @@
         });
         //$( "#connect" ).click(function() { connect(); });
         //$( "#disconnect" ).click(function() { disconnect(); });
-        $("#send").click(function() { sendName(); scrollDown(); flush(); 
+        $("#send").click(function() { 
+            sendName(); scrollDown(); flush(); 
             document.getElementById('message').value='';});
     });
     

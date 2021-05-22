@@ -52,7 +52,7 @@
                 <tr>
                     <td>
                         <h2><c:out value="${post.name}"/></h2>
-                        <a href="<c:url value='/chat?id=${post.id}&name=${post.name}'/>" style="color:blue">Написать в чат</a>
+                        <a href="<c:url value='/chat?id=${post.id}&name=${post.name}&user=${user}'/>" style="color:blue">Написать в чат</a>
                      
                         <br><input type="button"  value="+ Добавить пользователя" style="background:green; color:white; border-radius: 10px;" onclick="window.location.href='<c:url value='/add?id=${post.id}&name=${post.name}'/>';"/>
                     </td>
